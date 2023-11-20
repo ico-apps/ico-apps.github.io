@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>EBP LIFE reinforcement - Brno 2023</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					
+					<h1 style="color:#00c387;">EuroBirdPortal</h1>
+
+					<img src="https://eurobirdportal.org/img/ebp-logo.svg"/>
+
+
+				</section>
+				<section>
+
+					<iframe width="620px" height="580px" src="https://eurobirdportal.org/embedded/ebp/cat/GARGLA/occurrence/52weeks" frameborder="0" allowfullscreen></iframe>
+
+					<p><a href="https://ico-apps.github.io/ebp_docs/EBP-repository.html">API documentation <i class="fa-solid fa-circle-info"></i></a></p>
+
+				</section>
+				<section data-state="customevent">
+					<h2><span style="color:#00c387;">Protocol </span> sample</h2>
+					<pre>
+					<code class="json" style="font-size: 12px;">{
+							"protocol_code": "ODJ",
+							"title": "Ocells dels Jardins",
+							"project_type": "GS",
+							"method": "T",
+							"website": "http://ocellsdelsjardins.cat/",
+							"description": "Ocells dels Jardins is a citizen science project aimed to monitor the use of gardens and small parks by birds and other wildlife.",
+							"protocol_details": "Very simple protocol. Only birds detected in the defined sampling area (i.e. garden) and that are no flying-over should be reported and, if possible, counted (maximum number detected in a given moment). A predefined list of 52 bird species and 5 non-bird species is given but poeple can report any bird species if they wish. Participants can count birds any time of the year and as many times as they wish, but it is encouraged to do so at least twice a year (last week of January and last week of May).",
+							"ebp_data_structure": "Identital to original database",
+							"citation": "2015. Ocells dels Jardins, Catalan Ornithological Institute",
+							"id_gbif" : "",
+							"geographic_coverage": "Catalonia, Spain",
+							"start_year": 2014,
+							"end_year": "",
+							"ongoing": true,
+							"link": "",
+							"fixed_list_tags": "ESP(54105;54154;57821;58496;58952;58861;60925;61286;61290;53077;54565;55328;55871;57729;57746;58455;58252;60727;61340;61408);NFO"
+						}</code>
+					</pre>
+				</section>
+				<section data-markdown style="font-size: 22px;">
+
+					<textarea data-template>
+
+					# a) Project types
+					| project_type | Project title |
+					| ------------ | ------------- |
+					| CB |	Common breeding bird survey |
+					| CW |	Common winter bird survey |
+					| WW |	Winter waterbird count |
+					| BA |	Breeding bird atlas |
+					| MC |	Migration count |
+					| WA |	Winter bird atlas |
+					| GS |	Garden bird survey |
+					| RB |	Rare breeding bird survey |
+					| BR |	Bird ringing/banding results |
+					| NF | Nocturnal flight calls survey |
+					| OT |	other monitoring project |
+
+					</textarea>
+
+				</section>
+				<section data-markdown style="font-size: 22px;">
+
+					<textarea data-template>
+
+					# b) Project methods
+
+					| Code | Method |
+					| ------------ | ------------- |
+					| P |	point counts	       |
+					| M |	mapping methods
+					| L | line-transect |
+					| T | flexible surveys in which only time is controlled and there is no special requirement regarding the area/distance covered or speed |
+					
+					</textarea>
+
+				</section>
+				<section data-markdown style="font-size: 22px;">
+
+					<textarea data-template>
+
+						# c.1) Species tags
+
+						| Species tags | Species tag description                                |
+						|--------------|--------------------------------------------------------|
+						| NFO          | no fly-overs                                           |
+						| ORB          | only ringed/trapped birds                              |
+						| OBB          | only breeding birds                                    |
+						| OWB          | only waterbirds                                        |
+						| OSB          | only seabirds                                          |
+						| ORA          | only raptors                                           |
+						| ORS          | only raptors and soaring birds                         |
+						| OAM          | only active migrants                                   |
+						| PLN          | partial list no strict:  other species can be reported |
+
+					</textarea>
+
+					
+				</section>
+
+				<section>
+
+					<h1>c.2) Fixed lists</h1>
+
+					<p>{
+						"fixed_list_tags": 
+						"ESP(54105;54154;57821;58496;61408);NFO"
+					}</p>
+					</code>
+
+				</section>
+
+				
+
+				<section>
+
+					<h2>API protocol methods</h2>
+					
+					<p style="color:#00c387;">https://api.eurobirdportal.org/protocols</p>
+
+					<ul>
+						<li><span style="color:#00c387;">POST</span> protocol creation providing JSON</li>
+						<li><span style="color:#00c387;">PUT</span> protocol modification providing JSON</li>
+						<li><span style="color:#00c387;">GET</span> list registred protocols</li>
+						<li><span style="color:#00c387;">DELETE</span> delete the protocol {protocol_code} if it has no related events</li>
+					</ul>
+
+				</section>
+
+
+				<section data-state="customevent">
+					<h2><span style="color:#00c387;">Data provison</span></h2>
+					<pre>
+					<code class="json" style="font-size: 14px;" data-line-numbers="4,15">
+						{
+							"mode": "S",
+							"partner_source": "CAT_TEST",
+							"start_date": "2019-07-31",
+							"end_date": "2019-07-31",
+							"events": [
+								{
+									"data_type": "C",
+									"date": "2019-07-31",
+									"event_id": "10kmE374N210_1564531200",
+									"location": "10kmE374N210",
+									"location_mode": "A",
+									"observer": "2",
+									"protocol_id": "ODJ",
+									"records": 104,
+									"time": ""
+								}
+							  ],
+							  "records": [
+
+							  ]
+						}
+					</code>
+					</pre>
+				</section>
+				<section>
+
+					<h1>Test</h1>
+					<p><a href="https://reqbin.com/">https://reqbin.com/</a></p>
+					<textarea>
+						{
+							"protocol_code": "ODJ",
+							"title": "Ocells dels Jardins",
+							"project_type": "GS",
+							"method": "T",
+							"website": "http://ocellsdelsjardins.cat/",
+							"description": "Ocells dels Jardins is a citizen science project aimed to monitor the use of gardens and small parks by birds and other wildlife.",
+							"protocol_details": "Very simple protocol. Only birds detected in the defined sampling area (i.e. garden) and that are no flying-over should be reported and, if possible, counted (maximum number detected in a given moment). A predefined list of 52 bird species and 5 non-bird species is given but poeple can report any bird species if they wish. Participants can count birds any time of the year and as many times as they wish, but it is encouraged to do so at least twice a year (last week of January and last week of May).",
+							"ebp_data_structure": "Identital to original database",
+							"citation": "2015. Ocells dels Jardins, Catalan Ornithological Institute",
+							"geographic_coverage": "Catalonia, Spain",
+							"start_year": 2014,
+							"ongoing": true,
+							"link": "",
+							"fixed_list_tags": "ESP(54105;54154;57821;58496;58952;58861;60925;61286;61290;53077;54565;55328;55871;57729;57746;58455;58252;60727;61340;61408);NFO"
+						}
+
+					</textarea>
+
+				</section>
+				<section>
+
+					<h2>Protocol overview 
+						<a href="https://api.eurobirdportal.org/admin/protocols">(internal area)</a>
+					</h2>
+
+					<img src="img/protocols.png"/>
+
+				</section>
+
+				<section>
+
+					<h2>Protocol stats 
+						<a href="https://api.eurobirdportal.org/admin/stats/4/2023">(internal area)</a>
+					</h2>
+
+
+					<img src="img/protocol_stats.png"/>
+
+				</section>
+			
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="https://kit.fontawesome.com/2caf0d8c46.js" crossorigin="anonymous"></script>
+
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
